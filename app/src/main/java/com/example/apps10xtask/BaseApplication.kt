@@ -1,6 +1,10 @@
 package com.example.apps10xtask
 
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
+
 /**
  * Created by bhupendrapatel on 09/06/22.
- */class Baseapplication {
-}
+ */
+@HiltAndroidApp
+class BaseApplication : Application()

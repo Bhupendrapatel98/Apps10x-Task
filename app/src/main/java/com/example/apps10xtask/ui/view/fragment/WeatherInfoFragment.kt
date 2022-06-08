@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.apps10xtask.R
 
+/**
+ * Created by bhupendrapatel on 09/06/22.
+ */
 class WeatherInfoFragment : Fragment() {
 
     override fun onCreateView(
