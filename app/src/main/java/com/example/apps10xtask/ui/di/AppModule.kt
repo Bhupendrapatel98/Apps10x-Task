@@ -1,5 +1,6 @@
 package com.example.apps10xtask.ui.di
 
+import com.example.apps10xtask.ui.data.api.WeatherApiServices
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,4 +26,8 @@ class AppModule {
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+
+    @Provides
+    fun provideApiPostService(retrofit: Retrofit): WeatherApiServices =
+        retrofit.create(WeatherApiServices::class.java)
 }
