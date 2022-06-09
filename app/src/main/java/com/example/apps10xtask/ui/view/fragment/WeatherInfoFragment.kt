@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -24,6 +26,7 @@ class WeatherInfoFragment : Fragment() {
 
     lateinit var fragmentWeatherInfoBinding: FragmentWeatherInfoBinding
     private val weatherViewModel: WeatherViewModel by viewModels()
+    lateinit var animSlideDown: Animation
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,14 +41,16 @@ class WeatherInfoFragment : Fragment() {
         weatherViewModel.weatherLiveData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Resource.Loading -> {
-                    //Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
+                    fragmentWeatherInfoBinding.progressBar.visibility = View.VISIBLE
                 }
                 is Resource.Failed -> {
+                    fragmentWeatherInfoBinding.progressBar.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Success -> {
+                    fragmentWeatherInfoBinding.progressBar.visibility = View.GONE
+                    fragmentWeatherInfoBinding.cardView.visibility = View.VISIBLE
                     fragmentWeatherInfoBinding.weather = it.data
-                   // Toast.makeText(context, it.data.main.temp.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
         })
@@ -54,14 +59,21 @@ class WeatherInfoFragment : Fragment() {
         weatherViewModel.foreCastLiveData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Resource.Loading -> {
-                   // Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
+                    fragmentWeatherInfoBinding.progressBar.visibility = View.VISIBLE
                 }
                 is Resource.Failed -> {
+                    fragmentWeatherInfoBinding.progressBar.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Success -> {
+                    fragmentWeatherInfoBinding.progressBar.visibility = View.GONE
+                    fragmentWeatherInfoBinding.recyclerView.visibility = View.VISIBLE
+
                     val foreCastAdapter = ForeCastAdapter(it.data.list)
                     fragmentWeatherInfoBinding.recyclerView.adapter = foreCastAdapter
+
+                    animSlideDown = AnimationUtils.loadAnimation(context, R.anim.slide_up)
+                    fragmentWeatherInfoBinding.recyclerView.startAnimation(animSlideDown)
                     //Toast.makeText(context, it.data.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
