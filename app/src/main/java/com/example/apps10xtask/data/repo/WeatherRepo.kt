@@ -1,8 +1,8 @@
-package com.example.apps10xtask.ui.data.repo
+package com.example.apps10xtask.data.repo
 
-import com.example.apps10xtask.ui.data.api.WeatherApiServices
-import com.example.apps10xtask.ui.data.model.ForeCast
-import com.example.apps10xtask.ui.data.model.Weather
+import com.example.apps10xtask.data.api.WeatherApiServices
+import com.example.apps10xtask.data.model.ForeCast
+import com.example.apps10xtask.data.model.Weather
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

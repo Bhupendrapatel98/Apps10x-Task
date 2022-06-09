@@ -1,6 +1,6 @@
-package com.example.apps10xtask.ui.di
+package com.example.apps10xtask.di
 
-import com.example.apps10xtask.ui.data.api.WeatherApiServices
+import com.example.apps10xtask.data.api.WeatherApiServices
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

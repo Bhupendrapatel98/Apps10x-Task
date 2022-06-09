@@ -1,7 +1,7 @@
-package com.example.apps10xtask.ui.data.api
+package com.example.apps10xtask.data.api
 
-import com.example.apps10xtask.ui.data.model.ForeCast
-import com.example.apps10xtask.ui.data.model.Weather
+import com.example.apps10xtask.data.model.ForeCast
+import com.example.apps10xtask.data.model.Weather
 import retrofit2.http.GET
 import retrofit2.http.Query
 

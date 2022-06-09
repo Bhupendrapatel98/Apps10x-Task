@@ -1,4 +1,4 @@
-package com.example.apps10xtask.ui.data.model
+package com.example.apps10xtask.data.model
 
 data class Main(
     val feels_like: Double,
