@@ -19,8 +19,8 @@ class WeatherRepo @Inject constructor(private val weatherApiServices: WeatherApi
         emit(response)
     }.flowOn(Dispatchers.IO)
 
-    fun getForecast(q: String, APPID: String): Flow<ForeCast> = flow {
-        val response = weatherApiServices.getForecast(q, APPID)
+    fun getForecast(q: String, APPID: String,units:String): Flow<ForeCast> = flow {
+        val response = weatherApiServices.getForecast(q, APPID,units)
         emit(response)
     }.flowOn(Dispatchers.IO)
 }

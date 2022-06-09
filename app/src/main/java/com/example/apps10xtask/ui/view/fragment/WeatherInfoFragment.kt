@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.apps10xtask.R
 import com.example.apps10xtask.databinding.FragmentWeatherInfoBinding
+import com.example.apps10xtask.ui.view.adapter.ForeCastAdapter
 import com.example.apps10xtask.ui.viewModel.WeatherViewModel
 import com.example.apps10xtask.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,14 +38,14 @@ class WeatherInfoFragment : Fragment() {
         weatherViewModel.weatherLiveData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Resource.Loading -> {
-                    Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Failed -> {
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Success -> {
                     fragmentWeatherInfoBinding.weather = it.data
-                    Toast.makeText(context, it.data.main.temp.toString(), Toast.LENGTH_SHORT).show()
+                   // Toast.makeText(context, it.data.main.temp.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
         })
@@ -53,13 +54,15 @@ class WeatherInfoFragment : Fragment() {
         weatherViewModel.foreCastLiveData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Resource.Loading -> {
-                    Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
+                   // Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Failed -> {
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Success -> {
-                    Toast.makeText(context, it.data.toString(), Toast.LENGTH_SHORT).show()
+                    val foreCastAdapter = ForeCastAdapter(it.data.list)
+                    fragmentWeatherInfoBinding.recyclerView.adapter = foreCastAdapter
+                    //Toast.makeText(context, it.data.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
         })

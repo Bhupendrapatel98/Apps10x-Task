@@ -45,7 +45,7 @@ class WeatherViewModel @Inject constructor(private val weatherRepo: WeatherRepo)
         viewModelScope.launch {
             _foreCastLiveData.value = Resource.loading()
 
-            weatherRepo.getForecast("Bengaluru", "9b8cb8c7f11c077f8c4e217974d9ee40")
+            weatherRepo.getForecast("Bengaluru", "9b8cb8c7f11c077f8c4e217974d9ee40","metric")
                 .catch { e ->
                     _foreCastLiveData.value = Resource.failed(e.message.toString())
                 }.collect() { data ->

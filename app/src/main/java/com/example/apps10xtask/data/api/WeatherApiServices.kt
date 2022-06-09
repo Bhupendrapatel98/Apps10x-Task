@@ -20,6 +20,7 @@ interface WeatherApiServices {
     @GET("forecast")
     suspend fun getForecast(
         @Query("q") q: String,
-        @Query("APPID") APPID: String
+        @Query("APPID") APPID: String,
+        @Query("units") units: String
     ): ForeCast
 }
