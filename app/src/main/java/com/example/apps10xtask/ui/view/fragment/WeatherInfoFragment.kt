@@ -1,6 +1,7 @@
 package com.example.apps10xtask.ui.view.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -34,15 +35,31 @@ class WeatherInfoFragment : Fragment() {
 
         weatherViewModel.getWeather()
         weatherViewModel.weatherLiveData.observe(viewLifecycleOwner, Observer {
-            when(it){
+            when (it) {
                 is Resource.Loading -> {
-                     Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Failed -> {
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Success -> {
-                    Toast.makeText(context,it.toString(), Toast.LENGTH_SHORT).show()
+                    fragmentWeatherInfoBinding.weather = it.data
+                    Toast.makeText(context, it.data.main.temp.toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+
+        weatherViewModel.getForecast()
+        weatherViewModel.foreCastLiveData.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is Resource.Loading -> {
+                    Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Failed -> {
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Success -> {
+                    Toast.makeText(context, it.data.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
         })

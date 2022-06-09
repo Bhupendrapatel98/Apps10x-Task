@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.apps10xtask.data.model.ForeCast
 import com.example.apps10xtask.data.model.Weather
 import com.example.apps10xtask.data.repo.WeatherRepo
 import com.example.apps10xtask.utils.Resource
@@ -23,17 +24,32 @@ class WeatherViewModel @Inject constructor(private val weatherRepo: WeatherRepo)
     val weatherLiveData: LiveData<Resource<Weather>>
         get() = _weatherLiveData
 
+    private val _foreCastLiveData = MutableLiveData<Resource<ForeCast>>()
+    val foreCastLiveData: LiveData<Resource<ForeCast>>
+        get() = _foreCastLiveData
+
     fun getWeather() {
         viewModelScope.launch {
             _weatherLiveData.value = Resource.loading()
 
-            weatherRepo.getWeather("Bengaluru", "9b8cb8c7f11c077f8c4e217974d9ee40")
+            weatherRepo.getWeather("Bengaluru", "9b8cb8c7f11c077f8c4e217974d9ee40", "metric")
                 .catch { e ->
-                    Log.d("dfjdfh111", "getWeather: "+e.message.toString())
                     _weatherLiveData.value = Resource.failed(e.message.toString())
                 }.collect() { data ->
-                    Log.d("dfjdfh2222", "getWeather: "+data)
                     _weatherLiveData.value = Resource.success(data)
+                }
+        }
+    }
+
+    fun getForecast() {
+        viewModelScope.launch {
+            _foreCastLiveData.value = Resource.loading()
+
+            weatherRepo.getForecast("Bengaluru", "9b8cb8c7f11c077f8c4e217974d9ee40")
+                .catch { e ->
+                    _foreCastLiveData.value = Resource.failed(e.message.toString())
+                }.collect() { data ->
+                    _foreCastLiveData.value = Resource.success(data)
                 }
         }
     }

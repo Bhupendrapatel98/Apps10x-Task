@@ -1,6 +1,5 @@
 package com.example.apps10xtask.data.repo
 
-import android.util.Log
 import com.example.apps10xtask.data.api.WeatherApiServices
 import com.example.apps10xtask.data.model.ForeCast
 import com.example.apps10xtask.data.model.Weather
@@ -15,9 +14,8 @@ import javax.inject.Inject
  */
 class WeatherRepo @Inject constructor(private val weatherApiServices: WeatherApiServices) {
 
-    fun getWeather(q: String, APPID: String): Flow<Weather> = flow {
-        val response = weatherApiServices.getWeather(q, APPID)
-        Log.d("dfhdhjuv", "getWeather: $response")
+    fun getWeather(q: String, APPID: String,units:String): Flow<Weather> = flow {
+        val response = weatherApiServices.getWeather(q, APPID,units)
         emit(response)
     }.flowOn(Dispatchers.IO)
 
