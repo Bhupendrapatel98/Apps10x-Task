@@ -8,10 +8,12 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.example.apps10xtask.R
 import com.example.apps10xtask.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Created by bhupendrapatel on 09/06/22.
  */
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
