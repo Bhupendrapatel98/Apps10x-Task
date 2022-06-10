@@ -9,5 +9,23 @@
         android:id="@+id/weatherInfoFragment"
         android:name="com.example.apps10xtask.ui.view.fragment.WeatherInfoFragment"
         android:label="fragment_weather_info"
-        tools:layout="@layout/fragment_weather_info" />
+        tools:layout="@layout/fragment_weather_info" >
+        <action
+            android:id="@+id/action_weatherInfoFragment_to_errorFragment"
+            app:destination="@id/errorFragment"
+            app:popUpTo="@id/weatherInfoFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/errorFragment"
+        android:name="com.example.apps10xtask.ui.view.fragment.ErrorFragment"
+        android:label="fragment_error"
+        tools:layout="@layout/fragment_error" >
+        <action
+            android:id="@+id/action_errorFragment_to_weatherInfoFragment"
+            app:destination="@id/weatherInfoFragment"
+            app:popUpTo="@id/errorFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
 </navigation>
