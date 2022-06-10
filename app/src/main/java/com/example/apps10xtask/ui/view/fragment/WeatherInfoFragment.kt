@@ -1,14 +1,13 @@
 package com.example.apps10xtask.ui.view.fragment
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.apps10xtask.R
@@ -17,6 +16,7 @@ import com.example.apps10xtask.ui.view.adapter.ForeCastAdapter
 import com.example.apps10xtask.ui.viewModel.WeatherViewModel
 import com.example.apps10xtask.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.DecimalFormat
 
 /**
  * Created by bhupendrapatel on 09/06/22.
@@ -50,6 +50,11 @@ class WeatherInfoFragment : Fragment() {
                 is Resource.Success -> {
                     fragmentWeatherInfoBinding.progressBar.visibility = View.GONE
                     fragmentWeatherInfoBinding.cardView.visibility = View.VISIBLE
+
+                    val df = DecimalFormat("0")
+                    val input = it.data.main.temp
+                    fragmentWeatherInfoBinding.currentTemp.text = df.format(input) + "\u00B0"
+
                     fragmentWeatherInfoBinding.weather = it.data
                 }
             }
@@ -74,7 +79,6 @@ class WeatherInfoFragment : Fragment() {
 
                     animSlideDown = AnimationUtils.loadAnimation(context, R.anim.slide_up)
                     fragmentWeatherInfoBinding.recyclerView.startAnimation(animSlideDown)
-                    //Toast.makeText(context, it.data.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
         })

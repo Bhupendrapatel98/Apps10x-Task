@@ -31,7 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="@{Double.toString(foreCastList.main.temp)}"
+                    android:text="@{Double.toString(foreCastList.main.temp)+`\u2103`}"
                     android:textColor="#2A2A2A"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
