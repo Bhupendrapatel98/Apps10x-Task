@@ -36,9 +36,8 @@ class WeatherInfoFragment : Fragment() {
         // Inflate the layout for this fragment
         fragmentWeatherInfoBinding = FragmentWeatherInfoBinding.inflate(inflater, container, false)
 
-        fragmentWeatherInfoBinding.lifecycleOwner = this
+        fragmentWeatherInfoBinding.lifecycleOwner = viewLifecycleOwner
 
-        weatherViewModel.getWeather()
         weatherViewModel.weatherLiveData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Resource.Loading -> {

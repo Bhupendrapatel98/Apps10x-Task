@@ -1,5 +1,6 @@
 package com.example.apps10xtask.data.repo
 
+import android.util.Log
 import com.example.apps10xtask.data.api.WeatherApiServices
 import com.example.apps10xtask.data.model.ForeCast
 import com.example.apps10xtask.data.model.Weather

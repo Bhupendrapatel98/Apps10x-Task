@@ -28,7 +28,12 @@ class WeatherViewModel @Inject constructor(private val weatherRepo: WeatherRepo)
     val weatherLiveData: LiveData<Resource<WeatherReport>>
         get() = _weatherLiveData
 
+    init {
+        getWeather()
+    }
+
     fun getWeather() {
+        Log.d("sdjnskbf", "getWeather: ")
         viewModelScope.launch {
             weatherRepo.getWeather("Bengaluru", "9b8cb8c7f11c077f8c4e217974d9ee40", "metric")
                 .collect {
